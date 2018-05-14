@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Launch} from '../../models/launch';
 import { Observable } from 'rxjs';
 import { SpacexApiService } from '../../services/spacex-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,13 +22,20 @@ export class HomeComponent implements OnInit {
   }
 
 
-  constructor(private spacexApiService: SpacexApiService) { }
+  constructor(
+    private spacexApiService: SpacexApiService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.spacexApiService.getLaunches().subscribe(launches => {
       this.launches = launches;
     });
 
+  }
+
+  navigateToPage2() {
+    this.router.navigate(['page2']);
   }
 
 }
